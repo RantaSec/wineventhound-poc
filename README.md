@@ -52,8 +52,6 @@ Logons with Logon types 2,4,5,8,9,10 imply that credentials on the host can be d
 
 ```
 index=wineventlog EventID=4624 LogonType IN(2,4,5,8,9,10) TargetUserSid="S-1-5-21-*" 
-TargetUserSid!="S-1-5-18" TargetUserSid!="S-1-5-20" 
-TargetUserSid!="S-1-5-90-0-35" TargetUserSid!="S-1-5-96-0-35"
 | stats values(TargetUserSid) as Sessions by Computer
 | Rename Computer as DNSHostName
 ```
