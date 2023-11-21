@@ -1,5 +1,7 @@
 
-# Architecture
+# Blog
+
+Read our [blog post](https://medium.com/@RantaSec/bloodhound-for-blue-teams-windows-event-id-4624-a259c76ee09e) for more details about this tool.
 
 # Installation
 
