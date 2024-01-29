@@ -31,9 +31,9 @@ Get-ADComputer -Filter 'Enabled -eq "True" -and DNSHostName -like "*"' `
 Logons with an elevated token imply that the user is an administrator on the computer.
 
 ```spl
-index=wineventlog EventID=4624 LogonType IN(2,4,5,8,9,10) TargetUserSid="S-1-5-21-*" 
-| stats values(TargetUserSid) as Sessions by Computer
-| Rename Computer as DNSHostName
+index=wineventlog EventID=4624 LogonType=10 TargetUserSid="S-1-5-21-*" 
+| stats values(TargetUserSid) as RDP by Computer
+| rename Computer as DNSHostName
 ```
 
 
@@ -44,7 +44,7 @@ Logons with a a logon type of 10 implies the user is logged onto the computer vi
 ```
 index=wineventlog EventID=4624 LogonType=10 TargetUserSid="S-1-5-21-*" 
 | stats values(TargetUserSid) as RDP by Computer
-| Rename Computer as DNSHostName
+| rename Computer as DNSHostName
 ```
 
 
@@ -55,7 +55,7 @@ Logons with Logon types 2,4,5,8,9,10 imply that credentials on the host can be d
 ```
 index=wineventlog EventID=4624 LogonType IN(2,4,5,8,9,10) TargetUserSid="S-1-5-21-*" 
 | stats values(TargetUserSid) as Sessions by Computer
-| Rename Computer as DNSHostName
+| rename Computer as DNSHostName
 ```
 
 
