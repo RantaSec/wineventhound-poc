@@ -31,9 +31,9 @@ Get-ADComputer -Filter 'Enabled -eq "True" -and DNSHostName -like "*"' `
 Logons with an elevated token imply that the user is an administrator on the computer.
 
 ```spl
-index=wineventlog EventID=4624 LogonType=10 TargetUserSid="S-1-5-21-*" 
-| stats values(TargetUserSid) as RDP by Computer
-| rename Computer as DNSHostName
+index=wineventlog EventID=4624 ElevatedToken="%%1842" TargetUserName!="*$" LogonType!=3 TargetUserSid="S-1-5-21-*" 
+| stats values(TargetUserSid) as Admins by Computer
+| Rename Computer as DNSHostName
 ```
 
 
